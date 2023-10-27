@@ -6509,8 +6509,7 @@ body.boxed-layout .switchable__image {
   }
 }
 
-/*---------- Navbar button ----------*/
-@media only screen and (min-width: 576px) {
+@media (max-width: 500px) {
   .modal-content {
     background-color: #fff;
     position: absolute;
@@ -6522,6 +6521,10 @@ body.boxed-layout .switchable__image {
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
+}
+
+/*---------- Navbar button ----------*/
+@media only screen and (min-width: 576px) {
   .navbar .btn:last-child {
     margin-left: 5px;
     margin-top: 0;
