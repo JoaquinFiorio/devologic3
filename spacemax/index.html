@@ -90,7 +90,7 @@
                         <div class="hero-content">
                             <h1 class="hero__title h2-font mb-2"><strong><em>"Building solutions for new technologies"</em></strong>
                             </h1>
-                            <p class="hero__description font-size--20 mb-3 mb-lg-5 mb-md-6">By using Blockchain technology, Web3, Artificial Intelligence and Virtual Reallity for develop cutting-edge applications, data analytics, and audits.</p>
+                            <p class="hero__description font-size--20 mb-3 mb-lg-5 mb-md-6">By using Blockchain technology, Web3, Artificial Intelligence and Virtual Reality for develop cutting-edge applications, data analytics, and audits.</p>
 
                             <a href="mailto:info@devologic3.com" class="btn btn-bg--primary rounded--full btn-hover--3d btn-hover--splash mb-2">
                                 <span class="btn__text">Contact Now</span>
@@ -128,10 +128,19 @@
                             <p style="text-align: justify;" class="h6-font mb-3">Their expertise in blockchain technology ensures secure and transparent data management, while their advanced AI solutions revolutionize the auditing process, making it more efficient and insightful. Moreover, they excel in creating intricate and tailor-made applications that meet the specific needs of their clients. Devologic3 is your trusted partner for harnessing the power of these emerging technologies to drive growth and success in today's dynamic business landscape.</p>
                             <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
 
-                                <a class="lightbox d-flex align-items-center" data-autoplay="true" data-vbtype="video" href="https://www.youtube.com/watch?v=aRh_eUQSmIg">
-                                    <span class="btn btn-media btn-media-size--sm btn-bg--primary rounded--full mr-1"> <i class="icon icon-triangle-right"></i></span>
+                                <a class="open-modal-button d-flex align-items-center">
+                                    <span onclick="openModal()" style="cursor: pointer;" class="btn btn-media btn-media-size--sm btn-bg--primary rounded--full mr-1">
+                                        <i class="icon icon-triangle-right"></i>
+                                    </span>
                                     <span class="font-w--700 color--white">Watch our video</span>
                                 </a>
+                            
+                                <div id="video-modal" class="modal">
+                                    <span class="close" onclick="closeModal()" style="color: white;">&times;</span>
+                                    <div class="modal-content">
+                                        <video src="./img/devologic-video.mp4" controls></video>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

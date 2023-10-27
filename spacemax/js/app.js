@@ -1,3 +1,14 @@
+function openModal() {
+    document.getElementById('video-modal').style.display = 'block';
+}
+
+function closeModal() {
+    var modal = document.getElementById('video-modal');
+    var video = modal.querySelector('video');
+    video.src = video.src;
+    modal.style.display = 'none';
+}
+
 (function ($) {
     "use strict";
 
