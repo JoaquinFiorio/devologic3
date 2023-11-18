@@ -88,4 +88,6 @@ router.post("/signin", signinHandler);
 
 router.delete("/:id", deleteUser);
 
+router.post("/consulta", consultarCertificado)
+
 module.exports = router;

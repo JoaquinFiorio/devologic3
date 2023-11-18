@@ -1,0 +1,7 @@
+
+POST http://localhost:3000/api/user/consulta
+Content-Type: application/json
+
+{
+    "email": "cojoa12345@gmail.com"
+}

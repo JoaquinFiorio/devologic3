@@ -1,6 +1,8 @@
 const User = require("../modelos/usuario.js");
 const fs = require("fs");
 const path = require("path");
+const PDFDocument = require('pdfkit');
+const nodemailer = require('nodemailer');
 
 createUser = async (req, res) => {
     try {
@@ -53,3 +55,28 @@ deleteUser = async (req, res) => {
         return res.status(500).json({ error: 'Error al eliminar el usuario' });
     }
 };
+
+consultarCertificado = async (req, res) => {
+
+    const { email } = req.body;
+
+    const user = await User.findOne({ email })
+
+    if(!user) {
+        res.status(404).send({ message: 'Usuario no encontrado' })
+    }
+
+    const imagePath = `./uploads/${user.imagePath}`;
+    const doc = new PDFDocument();
+
+    // Crear un archivo PDF con la imagen
+    doc.image(imagePath, { fit: [500, 412] });
+
+    // Nombre del archivo PDF
+    const pdfPath = './pdfs/archivo.pdf';
+
+    // Guardar el archivo PDF en el sistema de archivos
+    doc.pipe(fs.createWriteStream(pdfPath));
+    doc.end();
+
+}
