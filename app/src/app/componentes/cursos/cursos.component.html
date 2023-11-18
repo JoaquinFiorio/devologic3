@@ -1,1 +1,7 @@
-<p>cursos works!</p>
+<div>
+  <div *ngFor="let usuario of usuarios">
+    <h1>{{ usuario.email }}</h1>
+    {{usuario.imagePath}}
+    <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" alt="">
+  </div>
+</div>

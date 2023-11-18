@@ -26,7 +26,7 @@ export class LoginComponent {
           if (storedUser !== null) {
             this.auth.user = storedUser;
           }
-          this.router.navigate(['/cursos-y-talleres']);
+          this.router.navigate(['/lista-usuarios']);
         },
         error: (err: any) => {
           console.log(err)

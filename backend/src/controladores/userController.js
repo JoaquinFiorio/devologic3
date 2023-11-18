@@ -1,19 +1,13 @@
 const User = require("../modelos/usuario.js");
-const Role = require("../modelos/Role.js");
 
 createUser = async (req, res) => {
     try {
-        const { email, hash } = req.body;
-        const emailFound = await User.findOne({ email })
-        
-        if (emailFound) {
-            return res.status(401).send({ message: "Mail ya tiene una cuenta" })
-        }
+        const { email, hash, imagePath } = req.body;
 
-        // creating a new User
         const user = new User({
             email,
             hash,
+            imagePath
         });
 
         const savedUser = await user.save();
@@ -32,5 +26,11 @@ getUser = async (req, res) => {
 
 getUsers = async (req, res) => {
     const user = await User.find();
+    return res.json(user);
+};
+
+deleteUser = async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findOneAndDelete({ id });
     return res.json(user);
 };

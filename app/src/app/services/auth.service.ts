@@ -38,4 +38,16 @@ export class AuthService {
   resetPassword(id : string, password : any): Observable<any>{
     return this.http.put(this.url + "/forgot/" + id, password)
   }
+
+  createUser(email: string) {
+    return this.http.post(this.url + "/user", { email });
+  }
+
+  getUsers() {
+    return this.http.get<any[]>(this.url + "/user");
+  }
+
+  deleteUser(id: any) {
+    return this.http.delete(this.url + "/user", id)
+  }
 }

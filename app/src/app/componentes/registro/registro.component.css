@@ -1,17 +1,19 @@
 .login-container {
+  margin-top: 50px;
   background-color: #1a365daf; /* Fondo blanco */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
   padding: 20px;
   width: 350px;
-  height: 300px;
+  height: max-content;
 }
 
 .conteiner {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  height: max-content;
+  padding-bottom: 30px;
 }
 
 .login-form {
