@@ -43,7 +43,6 @@ export class RegistroComponent {
         this.auth.createUser(email.value)
         .subscribe({
             next: res => {
-              console.log(res);
               Swal.fire('¡Confirmado!', 'La acción se realizó con éxito.', 'success');
             },
             error: err => {

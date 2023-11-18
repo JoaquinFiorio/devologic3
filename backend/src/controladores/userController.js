@@ -1,4 +1,6 @@
 const User = require("../modelos/usuario.js");
+const fs = require("fs");
+const path = require("path");
 
 createUser = async (req, res) => {
     try {
@@ -19,8 +21,8 @@ createUser = async (req, res) => {
 };
 
 getUser = async (req, res) => {
-    const { hash } = req.body;
-    const user = await User.findOne({ hash });
+    const { id } = req.params;
+    const user = await User.findById(id);
     return res.json(user);
 };
 
@@ -31,6 +33,23 @@ getUsers = async (req, res) => {
 
 deleteUser = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findOneAndDelete({ id });
-    return res.json(user);
+    try {
+        const usuario = await User.findByIdAndRemove(id);
+    
+        if (usuario) {
+            fs.unlink(path.join(__dirname, `../../uploads/${usuario.imagePath}`), (error) => {
+            if (error) {
+                console.error('Error al eliminar el archivo:', error);
+                return res.status(500).json({ error: 'Error al eliminar el archivo' });
+            } else {
+                return res.json({ message: 'Usuario Deleted' });
+            }
+            });
+        } else {
+            return res.status(404).json({ message: 'Usuario not found' });
+        }
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        return res.status(500).json({ error: 'Error al eliminar el usuario' });
+    }
 };

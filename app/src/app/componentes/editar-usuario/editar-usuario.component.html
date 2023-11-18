@@ -1,1 +1,12 @@
-<p>editar-usuario works!</p>
+<div class="usuario-container">
+  <div class="user-info">
+    <div class="email">
+      Email: <h4>{{ usuario?.email }}</h4>
+    </div>
+    <div class="hash">
+      Hash: <h4>{{ usuario?.hash }}</h4>
+    </div>
+  </div>
+  <img [src]="'http://localhost:3000/uploads/' + usuario?.imagePath" class="tarjeta-imagen" alt="">
+  <button (click)="deleteUsuario(usuario._id)" class="delete-button">Eliminar usuario</button>
+</div>

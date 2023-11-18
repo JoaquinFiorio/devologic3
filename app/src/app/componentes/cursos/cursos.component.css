@@ -1,0 +1,52 @@
+.buscador {
+  margin-top: 50px;
+  margin-left: 3%;
+}
+
+.buscador input {
+  padding: 15px 10px;
+  background-color: transparent;
+  color: white;
+  width: 350px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #326fa9;
+}
+
+.buscador input:focus {
+  outline: none;
+}
+
+.tarjeta-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.tarjeta {
+  width: 300px;
+  border: 1px solid #aed4f7; /* Borde azul claro */
+  border-radius: 8px;
+  margin: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.tarjeta:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.tarjeta-titulo {
+  font-size: 18px;
+  color: #326fa9; /* Azul medio para el texto */
+  margin-bottom: 10px;
+}
+
+.tarjeta-imagen {
+  width: 100%;
+  border-radius: 8px;
+}
+

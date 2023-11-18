@@ -1,7 +1,19 @@
-<div>
-  <div *ngFor="let usuario of usuarios">
-    <h1>{{ usuario.email }}</h1>
-    {{usuario.imagePath}}
-    <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" alt="">
-  </div>
+<div class="buscador">
+  <input type="text"  name="filtroTexto" id="filtroTexto" [(ngModel)]="filtroTexto" (input)="buscarUsuario()" class="filtro" placeholder="Filtrar por email o hash">
 </div>
+<ng-container *ngIf="filtroTexto === '';else sinFiltro">
+  <div class="tarjeta-container">
+    <div *ngFor="let usuario of usuarios" class="tarjeta" (click)="selectedCard(usuario._id)">
+      <h1 class="tarjeta-titulo">{{ usuario.email }}</h1>
+      <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
+    </div>
+  </div>
+</ng-container>
+<ng-template #sinFiltro>
+  <div class="tarjeta-container">
+    <div *ngFor="let usuario of usuariosFiltrados" class="tarjeta" (click)="selectedCard(usuario._id)">
+      <h1 class="tarjeta-titulo">{{ usuario.email }}</h1>
+      <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
+    </div>
+  </div>
+</ng-template>

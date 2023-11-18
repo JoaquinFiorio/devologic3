@@ -60,7 +60,7 @@ async function escribirImagen(req, res, next) {
     
         // Convertir el lienzo a una imagen base64
         const imageBase64 = canvas.toDataURL('image/jpeg');
-        const nameDate = new Date().getTime()
+        const nameDate = uuidv4();
         // Guardar la imagen en el sistema de archivos
         const outputFilePath = `./uploads/${nameDate}.png`
         req.body.imagePath = `${nameDate}.png`;
@@ -78,7 +78,7 @@ async function escribirImagen(req, res, next) {
     }
 }
 
-router.get("/hash", getUser);
+router.get("/:id", getUser);
 
 router.get("/", getUsers);
 
@@ -86,6 +86,6 @@ router.post("/", escribirImagen, createUser);
 
 router.post("/signin", signinHandler);
 
-router.delete("/", getUsers);
+router.delete("/:id", deleteUser);
 
 module.exports = router;

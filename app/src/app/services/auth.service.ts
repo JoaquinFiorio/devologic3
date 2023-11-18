@@ -47,7 +47,11 @@ export class AuthService {
     return this.http.get<any[]>(this.url + "/user");
   }
 
+  getUser(id: string) {
+    return this.http.get<any[]>(this.url + "/user/" + id);
+  }
+
   deleteUser(id: any) {
-    return this.http.delete(this.url + "/user", id)
+    return this.http.delete(this.url + "/user/" + id)
   }
 }

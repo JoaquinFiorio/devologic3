@@ -1,8 +1,6 @@
 const express = require('express');
 const cors = require("cors")
-const session = require('express-session');
-const helmet = require("helmet")
-require("./libs/initialSetup")
+require("./src/libs/initialSetup")
 
 //inicializaciones
 const bodyParser = require('body-parser');
@@ -14,24 +12,17 @@ const morgan = require('morgan');
 
 //configuraciones
 app.set('port', process.env.PORT || 3000);
-app.use(bodyParser.json());
+app.use('/uploads', express.static(path.resolve('uploads')));
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(helmet());
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: false }));
-app.use('/uploads', express.static(path.resolve('uploads')));
-app.use(session({
-    secret: 'misessionsecreta',
-    resave: true,
-    saveUninitialized: true
-}));
 
 //rutas
-app.use('/api/user', require('./rutas/index'));
+app.use('/api/user', require('./src/rutas/index'));
 
 app.listen(app.get('port'), () => {
     console.log('Servidor en puerto', app.get('port'));
 });
-
