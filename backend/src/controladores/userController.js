@@ -3,6 +3,20 @@ const fs = require("fs");
 const path = require("path");
 const PDFDocument = require('pdfkit');
 const nodemailer = require('nodemailer');
+require("dotenv").config();
+
+const auth = {
+    host: 'smtp.ionos.es',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+    },
+    logger: true,
+}
+
+const transporter = nodemailer.createTransport(auth);
 
 createUser = async (req, res) => {
     try {
@@ -63,7 +77,7 @@ consultarCertificado = async (req, res) => {
     const user = await User.findOne({ email })
 
     if(!user) {
-        res.status(404).send({ message: 'Usuario no encontrado' })
+        return res.status(404).send({ message: 'Usuario no encontrado' })
     }
 
     const imagePath = `./uploads/${user.imagePath}`;
@@ -73,10 +87,35 @@ consultarCertificado = async (req, res) => {
     doc.image(imagePath, { fit: [500, 412] });
 
     // Nombre del archivo PDF
-    const pdfPath = './pdfs/archivo.pdf';
+    const pdfPath = './pdfs/certificacion.pdf';
 
     // Guardar el archivo PDF en el sistema de archivos
     doc.pipe(fs.createWriteStream(pdfPath));
     doc.end();
+
+    // Configurar el correo electrónico
+    const mailOptions = {
+        from: 'info@devologic3.com',
+        to: email,
+        subject: 'Adjunto: Archivo PDF con imagen',
+        text: 'Se adjunta el archivo PDF con la imagen.',
+        attachments: [
+        {
+            filename: 'certificacion.pdf',
+            path: pdfPath,
+            encoding: 'base64',
+        },
+        ],
+    };
+
+    // Enviar el correo electrónico
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error(error);
+        } else {
+            fs.unlinkSync(pdfPath);
+            return res.status(200).send({ message: 'Correo enviado con éxito' })
+        }
+    });
 
 }
