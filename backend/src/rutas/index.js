@@ -40,7 +40,7 @@ async function escribirImagen(req, res, next) {
         const image = await loadImage('./uploads/certificado.jpeg'); // Reemplaza con la ruta de tu imagen
     
         // Crear un lienzo (canvas) con el mismo tamaño que la imagen original
-        const canvas = createCanvas(image.width, image.height, 'pdf');
+        const canvas = createCanvas(image.width, image.height);
         const context = canvas.getContext('2d');
     
         // Dibujar la imagen original en el lienzo
@@ -48,7 +48,7 @@ async function escribirImagen(req, res, next) {
     
         // Configurar el estilo del texto
         context.fillStyle = 'black';
-        context.font = '40px';
+        context.font = '40px sans-serif';
     
         // Escribir el hash en la parte superior de la imagen
         context.fillText(hash, 420, 400);
