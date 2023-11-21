@@ -7,6 +7,6 @@
       Hash: <h4>{{ usuario?.hash }}</h4>
     </div>
   </div>
-  <img [src]="'http://localhost:3000/uploads/' + usuario?.imagePath" class="tarjeta-imagen" alt="">
+  <img [src]="'https://devologic3-production.up.railway.app/uploads/' + usuario?.imagePath" class="tarjeta-imagen" alt="">
   <button (click)="deleteUsuario(usuario._id)" class="delete-button">Eliminar usuario</button>
 </div>

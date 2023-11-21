@@ -5,7 +5,7 @@
   <div class="tarjeta-container">
     <div *ngFor="let usuario of usuarios" class="tarjeta" (click)="selectedCard(usuario._id)">
       <h1 class="tarjeta-titulo">{{ usuario.email }}</h1>
-      <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
+      <img [src]="'https://devologic3-production.up.railway.app/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
     </div>
   </div>
 </ng-container>
@@ -13,7 +13,7 @@
   <div class="tarjeta-container">
     <div *ngFor="let usuario of usuariosFiltrados" class="tarjeta" (click)="selectedCard(usuario._id)">
       <h1 class="tarjeta-titulo">{{ usuario.email }}</h1>
-      <img [src]="'http://localhost:3000/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
+      <img [src]="'https://devologic3-production.up.railway.app/uploads/' + usuario.imagePath" class="tarjeta-imagen" alt="">
     </div>
   </div>
 </ng-template>

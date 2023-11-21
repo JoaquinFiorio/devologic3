@@ -72,50 +72,57 @@ deleteUser = async (req, res) => {
 
 consultarCertificado = async (req, res) => {
 
-    const { email } = req.body;
-
-    const user = await User.findOne({ email })
-
-    if(!user) {
-        return res.status(404).send({ message: 'Usuario no encontrado' })
-    }
-
-    const imagePath = `./uploads/${user.imagePath}`;
-    const doc = new PDFDocument();
-
-    // Crear un archivo PDF con la imagen
-    doc.image(imagePath, { fit: [500, 412] });
-
-    // Nombre del archivo PDF
-    const pdfPath = './pdfs/certificacion.pdf';
-
-    // Guardar el archivo PDF en el sistema de archivos
-    doc.pipe(fs.createWriteStream(pdfPath));
-    doc.end();
-
-    // Configurar el correo electrónico
-    const mailOptions = {
-        from: 'info@devologic3.com',
-        to: email,
-        subject: 'Adjunto: Archivo PDF con imagen',
-        text: 'Se adjunta el archivo PDF con la imagen.',
-        attachments: [
-        {
-            filename: 'certificacion.pdf',
-            path: pdfPath,
-            encoding: 'base64',
-        },
-        ],
-    };
-
-    // Enviar el correo electrónico
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-        } else {
-            fs.unlinkSync(pdfPath);
-            return res.status(200).send({ message: 'Correo enviado con éxito' })
+    try {
+        const { email } = req.body;
+        if (!fs.existsSync(pdfsFolder)) {
+            fs.mkdirSync(pdfsFolder);
         }
-    });
+
+        const user = await User.findOne({ email })
+
+        if(!user) {
+            return res.status(404).send({ message: 'Usuario no encontrado' })
+        }
+
+        const imagePath = `./uploads/${user.imagePath}`;
+        const doc = new PDFDocument();
+
+        // Crear un archivo PDF con la imagen
+        doc.image(imagePath, { fit: [500, 412] });
+
+        // Nombre del archivo PDF
+        const pdfPath = './pdfs/certificacion.pdf';
+
+        // Guardar el archivo PDF en el sistema de archivos
+        doc.pipe(fs.createWriteStream(pdfPath));
+        doc.end();
+
+        // Configurar el correo electrónico
+        const mailOptions = {
+            from: 'info@devologic3.com',
+            to: email,
+            subject: 'Adjunto: Archivo PDF con imagen',
+            text: 'Se adjunta el archivo PDF con la imagen.',
+            attachments: [
+            {
+                filename: 'certificacion.pdf',
+                path: pdfPath,
+                encoding: 'base64',
+            },
+            ],
+        };
+
+        // Enviar el correo electrónico
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+            } else {
+                fs.unlinkSync(pdfPath);
+                return res.status(200).send({ message: 'Correo enviado con éxito' })
+            }
+        });
+    } catch(error) {
+        console.log(error)
+    }
 
 }

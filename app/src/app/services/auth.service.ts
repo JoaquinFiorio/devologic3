@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  url = "http://localhost:3000/api";
+  url = "https://devologic3-production.up.railway.app/api";
   user = "";
 
   constructor(private http: HttpClient, private router: Router) { }
