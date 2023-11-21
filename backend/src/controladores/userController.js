@@ -74,6 +74,8 @@ consultarCertificado = async (req, res) => {
 
     try {
         const { email } = req.body;
+        const pdfsFolder = './pdfs';
+        
         if (!fs.existsSync(pdfsFolder)) {
             fs.mkdirSync(pdfsFolder);
         }
