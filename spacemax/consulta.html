@@ -142,6 +142,12 @@
                                 font-size: 24px;
                                 margin-top: 20px;
                               }
+                              #errorMessage {
+                                display: none;
+                                text-align: center;
+                                font-size: 24px;
+                                margin-top: 20px;
+                              }
                         </style>
                         <div id="loader">
                             <span class="loader"></span>
@@ -149,7 +155,10 @@
                         <div class="col-12 col-lg-6 ml-md-auto pl-lg-4 pl-xl-0">
                             <div class="newsletter-form form--v1 d-lg-flex align-items-lg-center justify-content-lg-between">
                                 <div id="successMessage" class="col-12 col-lg-12 mb-2 mb-lg-0">
-                                    <h3 class="font-size--30 mb-2 mb-md-0">Congratulations! Check your mailbox to receive your digital certificate</h3>
+                                    <h3 class="font-size--30 mb-2 mb-md-0">Congratulations! Check your mailbox to receive your digital certificate.</h3>
+                                </div>
+                                <div id="errorMessage" class="col-12 col-lg-12 mb-2 mb-lg-0">
+                                    <h3 class="font-size--30 mb-2 mb-md-0">User Not Found! Please refresh and check again.</h3>
                                 </div>
                                 <form action="#" class="form" id="consultaForm">
                                     <div class="input-group input-group--rounded d-flex">
@@ -217,9 +226,10 @@
 
 
     <script>
-        var loader = document.getElementById('loader');
-        var successMessage = document.getElementById('successMessage');
-        var form = document.getElementById('consultaForm');
+        const loader = document.getElementById('loader');
+        const successMessage = document.getElementById('successMessage');
+        const form = document.getElementById('consultaForm');
+        const errorMessage = document.getElementById('errorMessage')
     
         form.addEventListener('submit', function (event) {
             event.preventDefault(); // Evitar que el formulario se envíe automáticamente
@@ -228,7 +238,7 @@
             successMessage.style.display = 'none'; // Ocultar el mensaje de éxito
         
             // Obtener el valor del campo de correo electrónico
-            var email = document.getElementById('emailInput').value;
+            const email = document.getElementById('emailInput').value;
         
             // Realizar la petición a la API
             fetch('https://devologic3-production.up.railway.app/api/user/consulta', {
@@ -250,6 +260,10 @@
                 // Mostrar el mensaje de éxito si data.message es 'Correo enviado con éxito'
                 if (data.message === 'Correo enviado con éxito') {
                     successMessage.style.display = 'block';
+                    form.style.display = 'none'; // Ocultar el formulario
+                }
+                if (data.message === 'Usuario no encontrado') {
+                    errorMessage.style.display = 'block';
                     form.style.display = 'none'; // Ocultar el formulario
                 }
             })
