@@ -45,10 +45,12 @@ async function escribirImagen(req, res, next) {
     
         // Dibujar la imagen original en el lienzo
         context.drawImage(image, 0, 0, image.width, image.height);
+        const fontPath = '../../fonts/Roboto-Regular.ttf';
+        context.addFont(fontPath);
     
         // Configurar el estilo del texto
         context.fillStyle = 'black';
-        context.font = '40px sans-serif';
+        context.font = `40px ${fontPath}`;
     
         // Escribir el hash en la parte superior de la imagen
         context.fillText(hash, 420, 400);
