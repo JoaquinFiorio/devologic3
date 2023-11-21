@@ -45,7 +45,7 @@ async function escribirImagen(req, res, next) {
     
         // Dibujar la imagen original en el lienzo
         context.drawImage(image, 0, 0, image.width, image.height);
-        const fontPath = '../../fonts/Roboto-Regular.ttf';
+        const fontPath = './fonts/Roboto-Regular.ttf';
         registerFont(fontPath, { family: 'Roboto' });
     
         // Configurar el estilo del texto
