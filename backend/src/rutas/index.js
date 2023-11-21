@@ -40,11 +40,11 @@ async function escribirImagen(req, res, next) {
         const image = await loadImage('./uploads/certificado.jpeg'); // Reemplaza con la ruta de tu imagen
     
         // Crear un lienzo (canvas) con el mismo tamaño que la imagen original
-        const canvas = createCanvas(image.width, image.height);
+        const canvas = createCanvas(image.width, image.height, 'pdf');
         const context = canvas.getContext('2d');
     
         // Dibujar la imagen original en el lienzo
-        context.drawImage(image, 0, 0, image.width, image.height, 'pdf');
+        context.drawImage(image, 0, 0, image.width, image.height);
     
         // Configurar el estilo del texto
         context.fillStyle = 'black';
