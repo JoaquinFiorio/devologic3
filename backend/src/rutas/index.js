@@ -44,7 +44,7 @@ async function escribirImagen(req, res, next) {
         const context = canvas.getContext('2d');
     
         // Dibujar la imagen original en el lienzo
-        context.drawImage(image, 0, 0, image.width, image.height);
+        context.drawImage(image, 0, 0, image.width, image.height, 'pdf');
     
         // Configurar el estilo del texto
         context.fillStyle = 'black';
