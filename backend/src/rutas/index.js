@@ -3,7 +3,7 @@ const path = require("path");
 require("../controladores/userController.js");
 require("../controladores/authController.js");
 const router = Router();
-const { createCanvas, loadImage } = require('canvas');
+const { loadImage, createCanvas, registerFont } = require('canvas');
 const fs = require('fs');
 const User = require("../modelos/usuario.js")
 const { v4: uuidv4 } = require('uuid');
