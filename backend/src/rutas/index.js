@@ -48,7 +48,7 @@ async function escribirImagen(req, res, next) {
     
         // Configurar el estilo del texto
         context.fillStyle = 'black';
-        context.font = '40px Arial';
+        context.font = '40px sans-serif';
     
         // Escribir el hash en la parte superior de la imagen
         context.fillText(hash, 420, 400);
