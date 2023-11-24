@@ -34,19 +34,19 @@ export class EditarUsuarioComponent {
 
   deleteUsuario(id: string) {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer.',
+      title: 'Are you sure?',
+      text: 'This action can not be undone.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, confirmar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Yes, confirm',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
         this.auth.deleteUser(id)
         .subscribe(res => {
-            Swal.fire('¡Confirmado!', 'Usuario eliminado con Éxito', 'success');
+            Swal.fire('¡Confirmed!', 'The action was carried out successfully.', 'success');
             this.router.navigate(['/lista-usuarios']);
         })
       }
