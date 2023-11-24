@@ -1,5 +1,5 @@
 <div class="buscador">
-  <input type="text"  name="filtroTexto" id="filtroTexto" [(ngModel)]="filtroTexto" (input)="buscarUsuario()" class="filtro" placeholder="Filtrar por email o hash">
+  <input type="text"  name="filtroTexto" id="filtroTexto" [(ngModel)]="filtroTexto" (input)="buscarUsuario()" class="filtro" placeholder="Filter by Email or Hash">
 </div>
 <ng-container *ngIf="filtroTexto === '';else sinFiltro">
   <div class="tarjeta-container">
